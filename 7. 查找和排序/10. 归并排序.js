@@ -1,0 +1,26 @@
+// 稳定
+// 时间复杂度 O(n·log2n)
+// 最差时间分析 O(n²)
+// 空间复杂度 O(n)
+
+function mergeSort(arr) {
+    const length = arr.length
+    if (length < 2) {
+        return arr
+    }
+    const mid = Math.floor(length / 2)
+    const left = arr.splice(0, mid)
+    const right = arr
+    return merge(mergeSort(left), mergeSort(right))
+}
+
+function merge(left, right) {
+    const result = []
+    while (left.length > 0 && right.length > 0) {
+        result.push(left[0] <= right[0] ? left.shift() : right.shift())
+    }
+    return result.concat(left, right)
+}
+
+const arr = [91, 60, 96, 7, 35, 65, 10, 65, 9, 30, 20, 31, 77, 81, 24];
+console.log(mergeSort(arr));
